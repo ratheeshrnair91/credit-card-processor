@@ -1,8 +1,17 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: ReplicaSet
 metadata:
-  name: mypod
+  name: my-replicaset
 spec:
-  containers:
-  - name: credit-card-container
-    image: ratheeshrnair91/credit-card-processor:v1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: mycontainer
+        image: ratheeshrnair91/credit-card-processor:v1
